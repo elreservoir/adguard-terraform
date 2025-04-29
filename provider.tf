@@ -27,6 +27,7 @@ provider "proxmox" {
   pm_api_url = "https://192.168.178.135:8006/api2/json"
   pm_api_token_id = "terraform@pve!provider"
   pm_api_token_secret = data.vault_kv_secret_v2.proxmox_secrets.data["TERRAFORM_API_TOKEN"]
+  pm_tls_insecure = true
 }
 
 provider "adguard" {
