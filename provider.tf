@@ -4,9 +4,17 @@ terraform {
   }
 
   required_providers {
+    proxmox = {
+      source = "Telmate/proxmox"
+      version = "3.0.1-rc8"
+    }
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "2.3.6"
+    }
     adguard = {
-        source = "gmichels/adguard"
-        version = "1.6.0"
+      source = "gmichels/adguard"
+      version = "1.6.0"
     }
     vault = {
       source = "hashicorp/vault"
@@ -14,7 +22,12 @@ terraform {
     }
   }
 }
-  
+
+provider "proxmox" {
+  pm_api_url = "https://192.168.178.135:8006/api2/json"
+  pm_api_token_id = "terraform@pve!provider"
+  pm_api_token_secret = data.vault_kv_secret_v2.proxmox_secrets.data["TERRAFORM_API_TOKEN"]
+}
 
 provider "adguard" {
   host = "192.168.178.209"

@@ -20,3 +20,8 @@ data "vault_kv_secret_v2" "adguard_secrets" {
   mount = "kv"
   name = "adguard"
 }
+
+data "vault_kv_secret_v2" "proxmox_secrets" {
+  mount = "kv"
+  name = "proxmox"
+}
