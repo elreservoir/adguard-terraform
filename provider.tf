@@ -24,14 +24,14 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url = "https://192.168.178.135:8006/api2/json"
-  pm_api_token_id = "terraform@pve!provider"
-  pm_api_token_secret = data.vault_kv_secret_v2.proxmox_secrets.data["TERRAFORM_API_TOKEN"]
+  pm_api_url = data.vault_kv_secret_v2.proxmox_secrets.data["API_URL"]
+  pm_api_token_id = data.vault_kv_secret_v2.proxmox_secrets.data["API_TOKEN_ID"]
+  pm_api_token_secret = data.vault_kv_secret_v2.proxmox_secrets.data["API_TOKEN"]
   pm_tls_insecure = true
 }
 
 provider "adguard" {
-  host = "192.168.178.209"
+  host = data.vault_kv_secret_v2.adguard_secrets.data["HOST"]
   username = data.vault_kv_secret_v2.adguard_secrets.data["USERNAME"]
   password = data.vault_kv_secret_v2.adguard_secrets.data["PASSWORD"]
   scheme = "http"
